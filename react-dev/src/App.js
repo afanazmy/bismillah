@@ -6,11 +6,15 @@ import theme from "./theme";
 import { history, store } from "./redux/store";
 import Router from "./router";
 
+import Layout from "./components/layout/Layout";
+
 const App = () => {
   return (
     <ThemeProvider data-testid="app" theme={theme}>
       <Provider store={store}>
-        <Router history={history} />
+        <Layout>
+          <Router history={history} />
+        </Layout>
       </Provider>
     </ThemeProvider>
   );
