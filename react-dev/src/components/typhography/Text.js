@@ -11,7 +11,7 @@ const Text = styled.span`
 
   ${({ ellipsis }) => (ellipsis ? ellipsisCss : "")}
 
-  ${({ capitalize }) => (capitalize ? "text-transform: capitalize" : "")}
+  ${({ capitalize }) => (capitalize ? "text-transform: capitalize;" : "")}
 `;
 
 export default Text;
