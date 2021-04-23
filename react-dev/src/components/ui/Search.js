@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import classNames from "classnames";
 import { SearchOutlined } from "@ant-design/icons";
 
@@ -10,12 +10,17 @@ import { SearchContainer } from "./ui.style";
  * @param {Object} props
  * @param {(value: String) => String} props.onChange
  * @param {(value: String) => String} props.onSearch
+ * @param {String} props.defaultValue
  * @param {React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>} props.inputProps
  * @returns
  */
-const Search = ({ onChange, onSearch, inputProps }) => {
+const Search = ({ onChange, onSearch, defaultValue, inputProps }) => {
   const [focus, setFocus] = useState(false);
-  const [search, setSearch] = useState(inputProps?.value);
+  const [search, setSearch] = useState();
+
+  useEffect(() => {
+    setSearch(defaultValue);
+  }, [defaultValue]);
 
   /**
    *
@@ -45,6 +50,7 @@ const Search = ({ onChange, onSearch, inputProps }) => {
             ? onSearch(search)
             : false
         }
+        value={search}
       />
     </SearchContainer>
   );

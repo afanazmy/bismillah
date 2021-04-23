@@ -45,7 +45,7 @@ export const LoadingContainer = styled.div`
       .anticon-loading {
         position: absolute;
         top: 40%;
-        left: 45%;
+        left: 48%;
         font-size: 2em;
         color: ${palette("primary", 0)};
       }

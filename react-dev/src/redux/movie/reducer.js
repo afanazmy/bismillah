@@ -3,6 +3,7 @@ import action from "./action";
 const initState = {
   movies: [],
   totalResults: 0,
+  search: null,
   page: 1,
   lastPage: 1,
   movie: null,
@@ -16,6 +17,7 @@ export default function movieReducer(state = initState, dispatch) {
       return {
         ...state,
         loading: true,
+        search: dispatch.payload.s,
       };
 
     case action.GET_MOVIE_SUCCESS:
