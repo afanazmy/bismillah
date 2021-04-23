@@ -6,31 +6,57 @@ const initState = {
   search: null,
   page: 1,
   lastPage: 1,
-  movie: null,
+  movie: {},
   loading: false,
   error: null,
 };
 
 export default function movieReducer(state = initState, dispatch) {
   switch (dispatch.type) {
-    case action.GET_MOVIE_REQUEST:
+    case action.GET_MOVIES_REQUEST:
       return {
         ...state,
         loading: true,
         search: dispatch.payload.s,
       };
 
-    case action.GET_MOVIE_SUCCESS:
+    case action.GET_MOVIES_SUCCESS:
+      const { page } = dispatch.payload;
       return {
         ...state,
         loading: false,
-        movies: [...state.movies, ...dispatch.payload.movies],
+        movies:
+          page > 1
+            ? [...state.movies, ...dispatch.payload.movies]
+            : [...dispatch.payload.movies],
         totalResults: dispatch.payload.totalResults,
-        page: dispatch.payload.page,
+        page,
         lastPage: dispatch.payload.lastPage,
       };
 
-    case action.GET_MOVIE_ERROR:
+    case action.GET_MOVIES_ERROR:
+      return {
+        ...state,
+        loading: false,
+        error: dispatch.payload.error,
+      };
+
+    case action.SHOW_MOVIE_REQUEST:
+      const { Title } = dispatch.payload;
+      return {
+        ...state,
+        loading: true,
+        movie: { Title },
+      };
+
+    case action.SHOW_MOVIE_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        movie: { ...dispatch.payload.movie },
+      };
+
+    case action.SHOW_MOVIE_ERROR:
       return {
         ...state,
         loading: false,

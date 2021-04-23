@@ -9,7 +9,7 @@ import MovieList from "../components/MovieList";
 import Loading from "../components/ui/Loading";
 import { debounce } from "../lib/helper";
 
-const { getMovie } = action;
+const { getMovies } = action;
 
 class Movie extends Component {
   scrollY = window.scrollY;
@@ -21,8 +21,11 @@ class Movie extends Component {
   };
 
   loadMovie = (page = 1, search = "Avengers") => {
-    const { getMovie } = this.props;
-    getMovie({ page, search });
+    const { getMovies } = this.props;
+    const { loading } = this.props.movie;
+    if (!loading) {
+      getMovies({ page, search });
+    }
   };
 
   handleScroll = () => {
@@ -50,6 +53,6 @@ const mapStateToProps = (state) => ({
   movie: state.movie,
 });
 
-const mapDispatchToProps = { getMovie };
+const mapDispatchToProps = { getMovies };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Movie);

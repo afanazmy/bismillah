@@ -46,7 +46,7 @@ const Search = ({ onChange, onSearch, defaultValue, inputProps }) => {
         onBlur={() => setFocus(false)}
         onChange={handleChange}
         onKeyPress={({ key }) =>
-          key === "Enter" && typeof onSearch === "function"
+          key === "Enter" && typeof onSearch === "function" && search
             ? onSearch(search)
             : false
         }

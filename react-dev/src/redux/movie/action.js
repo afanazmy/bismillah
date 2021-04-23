@@ -1,18 +1,22 @@
 const action = {
   // action types
-  GET_MOVIE_REQUEST: "GET_MOVIE_REQUEST",
-  GET_MOVIE_SUCCESS: "GET_MOVIE_SUCCESS",
-  GET_MOVIE_ERROR: "GET_MOVIE_ERROR",
+  GET_MOVIES_REQUEST: "GET_MOVIES_REQUEST",
+  GET_MOVIES_SUCCESS: "GET_MOVIES_SUCCESS",
+  GET_MOVIES_ERROR: "GET_MOVIES_ERROR",
+
+  SHOW_MOVIE_REQUEST: "SHOW_MOVIE_REQUEST",
+  SHOW_MOVIE_SUCCESS: "SHOW_MOVIE_SUCCESS",
+  SHOW_MOVIE_ERROR: "SHOW_MOVIE_ERROR",
 
   // action
-  getMovie: ({ search, type, page }) => ({
-    type: action.GET_MOVIE_REQUEST,
+  getMovies: ({ search, type, page }) => ({
+    type: action.GET_MOVIES_REQUEST,
     payload: { s: search, type, page },
   }),
 
-  showMovie: ({ id }) => ({
-    type: action.GET_MOVIE_REQUEST,
-    payload: { i: id },
+  showMovie: ({ i, callback, ...restParam }) => ({
+    type: action.SHOW_MOVIE_REQUEST,
+    payload: { i, callback, ...restParam },
   }),
 };
 
