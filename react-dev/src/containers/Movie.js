@@ -7,14 +7,17 @@ import Heading from "../components/typhography/Heading";
 import action from "../redux/movie/action";
 import MovieList from "../components/MovieList";
 import Loading from "../components/ui/Loading";
+import { debounce } from "../lib/helper";
 
 const { getMovie } = action;
 
 class Movie extends Component {
-  state = {};
+  scrollY = window.scrollY;
 
   componentDidMount = () => {
     this.loadMovie();
+
+    window.addEventListener("scroll", (e) => debounce(this.handleScroll, 500));
   };
 
   loadMovie = (page = 1, search = "Avengers") => {
@@ -22,14 +25,22 @@ class Movie extends Component {
     getMovie({ page, search });
   };
 
+  handleScroll = () => {
+    const { page, lastPage, search } = this.props.movie;
+    const isScrollDown = this.scrollY < window.scrollY;
+    if (isScrollDown && page < lastPage) {
+      this.loadMovie(page + 1, search);
+    }
+    this.scrollY = window.scrollY;
+  };
+
   render() {
     const { loading } = this.props.movie;
     return (
       <MovieContainer data-testid="movie">
         <Heading>Movies</Heading>
-        <Loading loading={loading}>
-          <MovieList />
-        </Loading>
+        <MovieList />
+        <Loading loading={loading} style={{ marginTop: 12 }} />
       </MovieContainer>
     );
   }

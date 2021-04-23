@@ -38,6 +38,8 @@ export const MovieCardContainer = styled.div`
     img {
       width: 222px;
       height: 282px;
+      min-width: 222px;
+      min-height: 282px;
       object-fit: cover;
       border-radius: 10px;
       box-shadow: 0px 0px 10px 0px #0000005c;

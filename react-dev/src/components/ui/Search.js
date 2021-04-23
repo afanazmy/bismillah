@@ -16,7 +16,7 @@ import { SearchContainer } from "./ui.style";
  */
 const Search = ({ onChange, onSearch, defaultValue, inputProps }) => {
   const [focus, setFocus] = useState(false);
-  const [search, setSearch] = useState();
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     setSearch(defaultValue);

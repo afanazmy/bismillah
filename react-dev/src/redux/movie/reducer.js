@@ -24,7 +24,7 @@ export default function movieReducer(state = initState, dispatch) {
       return {
         ...state,
         loading: false,
-        movies: dispatch.payload.movies,
+        movies: [...state.movies, ...dispatch.payload.movies],
         totalResults: dispatch.payload.totalResults,
         page: dispatch.payload.page,
         lastPage: dispatch.payload.lastPage,

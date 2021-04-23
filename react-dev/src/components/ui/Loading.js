@@ -10,9 +10,9 @@ import classNames from "classnames";
  * @param {Boolean} props.loading
  * @returns
  */
-const Loading = ({ children, loading }) => {
+const Loading = ({ children, loading, ...restProps }) => {
   return (
-    <LoadingContainer data-testid="loading">
+    <LoadingContainer data-testid="loading" {...restProps}>
       <div className="loading-container">
         <div>
           <div className="loading">{loading && <LoadingOutlined />}</div>
@@ -21,7 +21,7 @@ const Loading = ({ children, loading }) => {
       <div
         className={classNames("loading-child", { "loading-overlay": loading })}
       >
-        {children}
+        {children ? children : <div style={{ textAlign: "center" }} />}
       </div>
     </LoadingContainer>
   );

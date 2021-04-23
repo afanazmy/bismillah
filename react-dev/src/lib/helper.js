@@ -29,3 +29,21 @@ export const API = async ({
     .then((res) => res.data)
     .catch((error) => console.log(error));
 };
+
+let timeout = null;
+
+/**
+ * @param {void} callback
+ * @param {Number=} time (ms)
+ */
+export const debounce = (callback, time = 1000) => {
+  try {
+    clearTimeout(timeout);
+  } catch (error) {
+    console.log(error);
+  }
+
+  timeout = setTimeout(() => {
+    return typeof callback === "function" ? callback() : true;
+  }, time || 1000);
+};
