@@ -3,7 +3,7 @@ import action from "./action";
 const initState = {
   movies: [],
   totalResults: 0,
-  search: null,
+  search: "Avengers",
   page: 1,
   lastPage: 1,
   movie: {},

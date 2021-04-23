@@ -20,10 +20,10 @@ class Movie extends Component {
     window.addEventListener("scroll", (e) => debounce(this.handleScroll, 500));
   };
 
-  loadMovie = (page = 1, search = "Avengers") => {
+  loadMovie = (page = 1, search = this.props.movie.search) => {
     const { getMovies } = this.props;
-    const { loading } = this.props.movie;
-    if (!loading) {
+    const { loading, movies } = this.props.movie;
+    if (!loading || movies.length === 0) {
       getMovies({ page, search });
     }
   };

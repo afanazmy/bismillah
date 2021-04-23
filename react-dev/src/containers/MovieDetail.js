@@ -22,6 +22,8 @@ const MovieDetail = ({ movie }) => {
     dispatch(showMovie({ i: id }));
   }, []);
 
+  const { loading } = movie;
+
   const {
     Title,
     Poster,
@@ -50,78 +52,86 @@ const MovieDetail = ({ movie }) => {
         {Title}
       </Text>
 
-      <div className="content">
-        <div className="movie-poster">
-          <Loading loading={!imageLoaded}>
-            <img src={Poster} alt={Title} onLoad={() => setImageLoaded(true)} />
-          </Loading>
+      {loading ? (
+        <Loading loading={loading} />
+      ) : (
+        <div className="content">
+          <div className="movie-poster">
+            <Loading loading={!imageLoaded}>
+              <img
+                src={Poster}
+                alt={Title}
+                onLoad={() => setImageLoaded(true)}
+              />
+            </Loading>
+          </div>
+          <div className="movie-data">
+            <Heading className="movie-title">{Title}</Heading>
+
+            <div className="movie-subtitle">
+              <Text>{Year}</Text>
+              <Text className="mh-8">•</Text>
+              <Text>{Genre}</Text>
+            </div>
+
+            <div className="movie-rating">
+              <StarFilled />
+              <Text className="mh-8">{imdbRating}</Text>
+              <Text style={{ marginLeft: 12 }}>Votes</Text>
+              <Text className="mh-8">{imdbVotes}</Text>
+            </div>
+
+            <div className="movie-info">
+              <Heading>About</Heading>
+              <Paragraph>{Plot}</Paragraph>
+            </div>
+
+            <div className="movie-info">
+              <Heading>Actors</Heading>
+              <Paragraph>{Actors}</Paragraph>
+            </div>
+
+            <div className="movie-info">
+              <Heading>Writer</Heading>
+              <Paragraph>{Writer}</Paragraph>
+            </div>
+
+            <div className="movie-info">
+              <Heading>Information</Heading>
+
+              <div className="movie-detail">
+                <Text className="title">Production</Text>
+                <Text>{Production}</Text>
+              </div>
+
+              <div className="movie-detail">
+                <Text className="title">Director</Text>
+                <Text>{Director}</Text>
+              </div>
+
+              <div className="movie-detail">
+                <Text className="title">Runtime</Text>
+                <Text>{Runtime}</Text>
+              </div>
+
+              <div className="movie-detail">
+                <Text className="title">Language</Text>
+                <Text>{Language}</Text>
+              </div>
+
+              <div className="movie-detail">
+                <Text className="title">Country</Text>
+                <Text>{Country}</Text>
+              </div>
+
+              <div className="movie-detail">
+                <Text className="title">Released</Text>
+                <Text>{Released}</Text>
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="movie-data">
-          <Heading className="movie-title">{Title}</Heading>
-
-          <div className="movie-subtitle">
-            <Text>{Year}</Text>
-            <Text className="mh-8">•</Text>
-            <Text>{Genre}</Text>
-          </div>
-
-          <div className="movie-rating">
-            <StarFilled />
-            <Text className="mh-8">{imdbRating}</Text>
-            <Text style={{ marginLeft: 12 }}>Votes</Text>
-            <Text className="mh-8">{imdbVotes}</Text>
-          </div>
-
-          <div className="movie-info">
-            <Heading>About</Heading>
-            <Paragraph>{Plot}</Paragraph>
-          </div>
-
-          <div className="movie-info">
-            <Heading>Actors</Heading>
-            <Paragraph>{Actors}</Paragraph>
-          </div>
-
-          <div className="movie-info">
-            <Heading>Writer</Heading>
-            <Paragraph>{Writer}</Paragraph>
-          </div>
-
-          <div className="movie-info">
-            <Heading>Information</Heading>
-
-            <div className="movie-detail">
-              <Text className="title">Production</Text>
-              <Text>{Production}</Text>
-            </div>
-
-            <div className="movie-detail">
-              <Text className="title">Director</Text>
-              <Text>{Director}</Text>
-            </div>
-
-            <div className="movie-detail">
-              <Text className="title">Runtime</Text>
-              <Text>{Runtime}</Text>
-            </div>
-
-            <div className="movie-detail">
-              <Text className="title">Language</Text>
-              <Text>{Language}</Text>
-            </div>
-
-            <div className="movie-detail">
-              <Text className="title">Country</Text>
-              <Text>{Country}</Text>
-            </div>
-
-            <div className="movie-detail">
-              <Text className="title">Released</Text>
-              <Text>{Released}</Text>
-            </div>
-          </div>
-        </div>
-      </div>
+      )}
     </MovieDetailContainer>
   );
 };
